@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 8d649b731668
+Revision ID: c43e665b459f
 Revises: 
-Create Date: 2024-02-27 18:51:55.615559
+Create Date: 2024-02-28 11:22:16.625831
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '8d649b731668'
+revision = 'c43e665b459f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -101,6 +101,17 @@ def upgrade():
     sa.ForeignKeyConstraint(['company_id'], ['companies.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('video_content',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('title', sa.String(length=500), nullable=False),
+    sa.Column('description', sa.Text(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('genre', sa.String(length=500), nullable=False),
+    sa.Column('video_url', sa.String(length=500), nullable=False),
+    sa.Column('thumbnail_url', sa.String(length=500), nullable=False),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     op.create_table('opp_genres',
     sa.Column('opportunities_id', sa.Integer(), nullable=False),
     sa.Column('genres_id', sa.Integer(), nullable=False),
@@ -128,6 +139,14 @@ def upgrade():
     sa.Column('updated_date', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['creator_id'], ['creators.id'], ),
     sa.ForeignKeyConstraint(['opportunity_id'], ['opportunities.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('watchlist',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('video_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['video_id'], ['video_content.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('feedback',
@@ -185,9 +204,11 @@ def downgrade():
     op.drop_table('feedback_media')
     op.drop_table('media')
     op.drop_table('feedback')
+    op.drop_table('watchlist')
     op.drop_table('submissions')
     op.drop_table('opp_types')
     op.drop_table('opp_genres')
+    op.drop_table('video_content')
     op.drop_table('opportunities')
     op.drop_table('creator_types')
     op.drop_table('creator_genres')

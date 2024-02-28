@@ -49,3 +49,6 @@ from .opportunity import Opportunity
 from .media import Media
 from .submission import Submission
 from .feedback import Feedback
+from .video_content import VideoContent
+from .watchlist import Watchlist
+
