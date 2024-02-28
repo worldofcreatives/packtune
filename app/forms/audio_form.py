@@ -12,7 +12,7 @@ GENRE_CHOICES = [
 ]
 
 
-class VideoForm(FlaskForm):
+class AudioForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired()])
     description = StringField("Description", validators=[DataRequired()])
     genre = SelectField("Genre", choices=GENRE_CHOICES, validators=[DataRequired()])
@@ -24,9 +24,14 @@ class VideoForm(FlaskForm):
         FileAllowed(['mp4', 'mov', "wav", "mp3"], 'Videos only!'),
         Optional()
     ])
+    audio = FileField('Audio', validators=[
+        FileAllowed(['mp3', 'wav', "wav", "mp3"], 'Audio only!'),
+        Optional()
+    ])
 
     def __init__(self, *args, is_update=False, **kwargs):
-        super(VideoForm, self).__init__(*args, **kwargs)
+        super(AudioForm, self).__init__(*args, **kwargs)
         if is_update:
             self.thumbnail.validators.append(Optional())
             self.video.validators.append(Optional())
+            self.audio.validators.append(Optional())

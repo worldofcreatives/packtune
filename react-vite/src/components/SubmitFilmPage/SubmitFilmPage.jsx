@@ -86,13 +86,13 @@ const SubmitFilmPage = () => {
           required
         />
 
-        <label htmlFor='videoFile'>Video File</label>
+        <label htmlFor='videoFile'>File</label>
         <input
           id='videoFile'
           type='file'
-          label='Video File'
+          label='File'
           onChange={handleVideoChange}
-          accept='video/mp4, video/mov'
+          accept='video/mp3, video/wav'
           required
         />
         <button className='video-submit' type='submit'>

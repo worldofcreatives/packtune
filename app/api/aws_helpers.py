@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 BUCKET_NAME = os.environ.get("S3_BUCKET")
 S3_LOCATION = f"https://{BUCKET_NAME}.s3.amazonaws.com/"
 ALLOWED_EXTENSIONS_IMAGE = {"png", "jpg", "jpeg", "gif"}
-ALLOWED_EXTENSIONS_VIDEO = {"mov", "mp4"}
+ALLOWED_EXTENSIONS_VIDEO = {"mov", "mp4", "wav", "mp3"}
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif", "mov", "mp4"}
 
 s3 = boto3.client(

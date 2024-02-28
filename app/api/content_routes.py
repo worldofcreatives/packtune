@@ -67,7 +67,7 @@ def add_content():
         thumbnail = form.thumbnail.data
         video = form.video.data
 
-        allowed_extensions = set(["png", "jpg", "jpeg", "gif", "mov", "mp4"])
+        allowed_extensions = set(["png", "jpg", "jpeg", "gif", "mov", "mp4", "wav", "mp3"])
         if not is_allowed_file(
             thumbnail.filename, allowed_extensions
         ) or not is_allowed_file(video.filename, allowed_extensions):
