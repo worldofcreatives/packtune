@@ -33,8 +33,8 @@ def get_user_profile(user_id):
         if company:
             user_data.update({
                 "company": {
-                    "user_id": company.user_id,
-                    "name": company.name,
+                    # "user_id": company.user_id,
+                    # "name": company.name,
                     "company_name": company.company_name,
                     "bio": company.bio,
                     "logo": company.logo,

@@ -8,8 +8,7 @@ class Company(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False, unique=True)
-    name = db.Column(db.String(255), nullable=False)
+    # name = db.Column(db.String(255), nullable=False)
     company_name = db.Column(db.String(255), nullable=False)
     bio = db.Column(db.Text, nullable=True)
     logo = db.Column(db.String(255), nullable=True)
@@ -20,8 +19,7 @@ class Company(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'user_id': self.user_id,
-            'name': self.name,
+            # 'name': self.name,
             'company_name': self.company_name,
             'bio': self.bio,
             'logo': self.logo,

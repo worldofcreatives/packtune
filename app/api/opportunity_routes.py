@@ -39,7 +39,7 @@ def create_opportunity():
     if not current_user.is_company():
         return jsonify({"error": "Unauthorized"}), 403
 
-    company = Company.query.filter_by(user_id=current_user.id).first()
+    company = Company.query.filter_by(id=current_user.company_id).first()
 
     form = OpportunityForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
@@ -72,7 +72,7 @@ def update_opportunity(id):
     if not opportunity:
         return jsonify({"error": "Opportunity not found"}), 404
 
-    company = Company.query.filter_by(user_id=current_user.id).first()
+    company = Company.query.filter_by(id=current_user.company_id).first()
     if not company:
         return jsonify({"error": "Unauthorized - User is not associated with any company"}), 403
 
@@ -107,7 +107,7 @@ def delete_opportunity(id):
     if not opportunity:
         return jsonify({"error": "Opportunity not found"}), 404
 
-    company = Company.query.filter_by(user_id=current_user.id).first()
+    company = Company.query.filter_by(id=current_user.company_id).first()
     if not company:
         return jsonify({"error": "Unauthorized - User is not associated with any company"}), 403
 
@@ -183,7 +183,7 @@ def get_submissions_for_opportunity(id):
         return jsonify({"error": "Opportunity not found"}), 404
 
     # Query for the company associated with the current user
-    company = Company.query.filter_by(user_id=current_user.id).first()
+    company = Company.query.filter_by(id=current_user.company_id).first()
     if not company:
         return jsonify({"error": "Access denied. User is not associated with any company."}), 403
 
@@ -213,7 +213,7 @@ def get_specific_submission(opp_id, sub_id):
     if creator and submission.creator_id == creator.id:
         return jsonify(submission.to_dict()), 200
 
-    company = Company.query.filter_by(user_id=current_user.id).first()
+    company = Company.query.filter_by(id=current_user.company_id).first()
     if company and opportunity.company_id == company.id:
         return jsonify(submission.to_dict()), 200
 
@@ -232,7 +232,7 @@ def update_submission_status(opp_id, sub_id):
     if submission.opportunity_id != opp_id:
         return jsonify({"error": "Submission does not belong to the given opportunity"}), 400
 
-    company = Company.query.filter_by(user_id=current_user.id).first()
+    company = Company.query.filter_by(id=current_user.company_id).first()
     if not company:
         return jsonify({"error": "Unauthorized to update submission status - User is not associated with any company"}), 403
 
@@ -274,7 +274,7 @@ def delete_submission(opp_id, sub_id):
         db.session.commit()
         return jsonify({"message": "Submission successfully deleted"}), 200
 
-    company = Company.query.filter_by(user_id=current_user.id).first()
+    company = Company.query.filter_by(id=current_user.company_id).first()
     if company and opportunity.company_id == company.id:
         db.session.delete(submission)
         db.session.commit()
@@ -299,7 +299,7 @@ def submit_feedback(opp_id, sub_id):
     if creator and submission.creator_id == creator.id:
         pass
     else:
-        company = Company.query.filter_by(user_id=current_user.id).first()
+        company = Company.query.filter_by(id=current_user.company_id).first()
         if not company or company.id != submission.opportunity.company_id:
             return jsonify({'error': 'You are unauthorized'}), 403
 
@@ -330,7 +330,7 @@ def list_feedback_for_submission(opp_id, sub_id):
         return jsonify({'error': 'Submission not found or does not belong to the specified opportunity'}), 404
 
     is_creator = submission.creator_id == current_user.id
-    company = Company.query.filter_by(user_id=current_user.id).first()
+    company = Company.query.filter_by(id=current_user.company_id).first()
     is_company_associated = company and company.id == submission.opportunity.company_id
 
     if not is_creator and not is_company_associated:

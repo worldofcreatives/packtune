@@ -4,8 +4,7 @@ from sqlalchemy.sql import text
 def seed_companies():
     # Example companies
     company1 = Company(
-        user_id=1,
-        name='Demo Corp',
+        # user_id=1,
         company_name='Demo Corporation',
         bio='A demo company for demonstration purposes.',
         logo='path/to/demo/logo.png',
@@ -13,8 +12,7 @@ def seed_companies():
     )
 
     company2 = Company(
-        user_id=5,
-        name='Tech Innovations',
+        # user_id=5,
         company_name='Innovative Tech Solutions',
         bio='Innovating the future of technology.',
         logo='path/to/tech/innovations/logo.png',
