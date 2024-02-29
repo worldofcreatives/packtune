@@ -1,7 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 from sqlalchemy import Enum
-from . import sub_media_table
+# from . import sub_media_table
 
 class Submission(db.Model):
     __tablename__ = 'submissions'
@@ -27,8 +27,8 @@ class Submission(db.Model):
     # Relationship to Opportunity
     opportunity = db.relationship('Opportunity', backref=db.backref('submissions', lazy=True))
 
-    # Many-to-Many Relationship with Media
-    subMedia = db.relationship('Media', secondary=sub_media_table, backref=db.backref('submissions', lazy='dynamic'))
+    # # Many-to-Many Relationship with Media
+    # subMedia = db.relationship('Media', secondary=sub_media_table, backref=db.backref('submissions', lazy='dynamic'))
 
     def to_dict(self):
         return {

@@ -1,6 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
-from . import creator_genre_table, creator_type_table
+# from . import creator_genre_table, creator_type_table
 
 class Creator(db.Model):
     __tablename__ = 'creators'
@@ -17,11 +17,11 @@ class Creator(db.Model):
     created_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    # Many-to-Many Relationship for Genres
-    genres = db.relationship('Genre', secondary=creator_genre_table, backref=db.backref('creators', lazy='dynamic'))
+    # # Many-to-Many Relationship for Genres
+    # genres = db.relationship('Genre', secondary=creator_genre_table, backref=db.backref('creators', lazy='dynamic'))
 
-    # Many-to-Many Relationship for Types
-    types = db.relationship('Type', secondary=creator_type_table, backref=db.backref('creators', lazy='dynamic'))
+    # # Many-to-Many Relationship for Types
+    # types = db.relationship('Type', secondary=creator_type_table, backref=db.backref('creators', lazy='dynamic'))
 
 
     def to_dict(self):
