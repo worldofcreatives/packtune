@@ -2,13 +2,13 @@ from .db import db
 from .db import environment, SCHEMA, add_prefix_for_prod
 
 # Assuming your environment variable and SCHEMA are defined elsewhere
-schema_args = {'schema': SCHEMA} if environment == "production" else {}
+# schema_args = {'schema': SCHEMA} if environment == "production" else {}
 
 # Associations
 creator_genre_table = db.Table('creator_genres',
     db.Column('creator_id', db.Integer, db.ForeignKey(add_prefix_for_prod('creators.id')), primary_key=True),
     db.Column('genre_id', db.Integer, db.ForeignKey(add_prefix_for_prod('genres.id')), primary_key=True),
-    **schema_args
+    # **schema_args
 )
 
 creator_type_table = db.Table('creator_types',
