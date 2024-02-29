@@ -1,6 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
-# from . import creator_genre_table, creator_type_table
 
 class Creator(db.Model):
     __tablename__ = 'creators'

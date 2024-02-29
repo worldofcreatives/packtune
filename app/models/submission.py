@@ -1,7 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 from sqlalchemy import Enum
-# from . import sub_media_table
 
 class Submission(db.Model):
     __tablename__ = 'submissions'

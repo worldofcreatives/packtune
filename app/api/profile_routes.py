@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db, User, Company, Creator, Genre, Type
-from app.forms.profile_form import ProfileForm
+from app.models import db, User, Company, Creator
+# from app.forms.profile_form import ProfileForm
 from werkzeug.utils import secure_filename
 import os
 import logging
