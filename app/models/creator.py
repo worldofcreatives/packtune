@@ -17,20 +17,12 @@ class Creator(db.Model):
     created_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    # # Many-to-Many Relationship for Genres
-    # genres = db.relationship('Genre', secondary=creator_genre_table, backref=db.backref('creators', lazy='dynamic'))
-
-    # # Many-to-Many Relationship for Types
-    # types = db.relationship('Type', secondary=creator_type_table, backref=db.backref('creators', lazy='dynamic'))
-
 
     def to_dict(self):
         return {
             'id': self.id,
             'user_id': self.user_id,
             'name': self.name,
-            'types': [type.to_dict() for type in self.types],
-            'genres': [genre.to_dict() for genre in self.genres],
             'status': self.status,
             'profile_pic': self.profile_pic,
             'bio': self.bio,

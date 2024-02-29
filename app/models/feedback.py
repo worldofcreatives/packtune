@@ -17,9 +17,6 @@ class Feedback(db.Model):
     # Relationship to Submission
     submission = db.relationship('Submission', backref=db.backref('feedbacks', lazy=True))
 
-    # # Many-to-Many Relationship with Media
-    # feedMedia = db.relationship('Media', secondary=feedback_media_table, backref=db.backref('feedbacks', lazy='dynamic'))
-
     def to_dict(self):
         return {
             'id': self.id,
@@ -27,5 +24,4 @@ class Feedback(db.Model):
             'sender_id': self.sender_id,
             'feedback': self.feedback,
             'created_date': self.created_date.isoformat(),
-            'feedMedia': [media.to_dict() for media in self.feedMedia],
         }

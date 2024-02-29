@@ -27,9 +27,6 @@ class Submission(db.Model):
     # Relationship to Opportunity
     opportunity = db.relationship('Opportunity', backref=db.backref('submissions', lazy=True))
 
-    # # Many-to-Many Relationship with Media
-    # subMedia = db.relationship('Media', secondary=sub_media_table, backref=db.backref('submissions', lazy='dynamic'))
-
     def to_dict(self):
         return {
             'id': self.id,
@@ -43,5 +40,4 @@ class Submission(db.Model):
             'collaborators': self.collaborators,
             'created_date': self.created_date.isoformat(),
             'updated_date': self.updated_date.isoformat(),
-            'subMedia': [media.to_dict() for media in self.subMedia],
         }
