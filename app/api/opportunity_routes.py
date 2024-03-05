@@ -51,6 +51,7 @@ def create_opportunity():
             budget=form.budget.data,
             guidelines=form.guidelines.data,
             company_id=company.id,
+            user_id=current_user.id
         )
         try:
             db.session.add(new_opportunity)
@@ -340,3 +341,26 @@ def list_feedback_for_submission(opp_id, sub_id):
     feedback_data = [feedback.to_dict() for feedback in feedback_list]
 
     return jsonify(feedback_data), 200
+
+# GET /api/user/opportunities - Get opportunities created by and submitted to by the current user
+
+@opportunity_routes.route('/browse', methods=['GET'])
+@login_required
+def user_opportunities():
+    user_id = current_user.id
+
+    # Fetch opportunities created by the user
+    created_opportunities = Opportunity.query.filter_by(user_id=user_id).all()
+    created_opportunities_data = [opportunity.to_dict() for opportunity in created_opportunities]
+
+    # Fetch opportunities the user has submitted to
+    # This assumes a many-to-one relationship from submissions to opportunities
+    submissions = Submission.query.filter_by(creator_id=user_id).all()
+    submitted_opportunities_ids = {submission.opportunity_id for submission in submissions}
+    submitted_opportunities = Opportunity.query.filter(Opportunity.id.in_(submitted_opportunities_ids)).all()
+    submitted_opportunities_data = [opportunity.to_dict() for opportunity in submitted_opportunities]
+
+    return jsonify({
+        "created_opportunities": created_opportunities_data,
+        "submitted_opportunities": submitted_opportunities_data
+    })

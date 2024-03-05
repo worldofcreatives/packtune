@@ -15,7 +15,6 @@ export const DELETE_OPPORTUNITY_REQUEST = 'opportunities/deleteOpportunityReques
 export const DELETE_OPPORTUNITY_SUCCESS = 'opportunities/deleteOpportunitySuccess';
 export const DELETE_OPPORTUNITY_FAILURE = 'opportunities/deleteOpportunityFailure';
 
-
 //*====> Action Creators <====
 const fetchOpportunitiesRequest = () => ({
     type: FETCH_OPPORTUNITIES_REQUEST,
@@ -86,7 +85,6 @@ const deleteOpportunityFailure = (error) => ({
   type: DELETE_OPPORTUNITY_FAILURE,
   payload: error,
 });
-
 
 //*====> Thunks <====
 
@@ -204,7 +202,7 @@ const initialState = {
     loadingSingleOpportunity: false,
     creatingSingleOpportunity: false,
     opportunities: [],
-    singleOpportunity: null,
+    userOpportunities: [],
     createdSingleOpportunity: null,
     error: '',
   };

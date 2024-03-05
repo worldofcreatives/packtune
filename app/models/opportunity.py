@@ -15,6 +15,7 @@ class Opportunity(db.Model):
     budget = db.Column(db.DECIMAL(10,2), nullable=True)
     guidelines = db.Column(db.Text, nullable=True)
     company_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('companies.id')), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     created_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
 
@@ -39,6 +40,8 @@ class Opportunity(db.Model):
             'types': [type.to_dict() for type in self.types],
             'description': self.description,
             'target_audience': self.target_audience,
+            'company_id': self.company_id,
+            'user_id': self.user_id,
             'budget': str(self.budget),
             'guidelines': self.guidelines,
             'created_date': self.created_date.isoformat(),

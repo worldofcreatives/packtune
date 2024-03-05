@@ -9,6 +9,7 @@ def seed_opportunities():
         description='Seeking original music to feature in a national commercial.',
         target_audience='All Ages',
         budget=5000.00,
+        user_id=1,
         guidelines='Original music only, any genre.',
         created_date=datetime.now(),
         updated_date=datetime.now()
@@ -20,6 +21,7 @@ def seed_opportunities():
         description='Looking for a catchy theme song for our new tech podcast.',
         target_audience='Tech Enthusiasts',
         budget=2000.00,
+        user_id=1,
         guidelines='Must be catchy and no longer than 30 seconds.',
         created_date=datetime.now(),
         updated_date=datetime.now()
